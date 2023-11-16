@@ -1,0 +1,50 @@
+<mat-card [formGroup]="sensorEditGroup">
+  <mat-card-header><h2>Add/Edit</h2></mat-card-header>
+  <mat-card-content>
+    <form class="sensor-edit-form">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput [formControl]="sensorEditGroup.controls.name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Model</mat-label>
+        <input matInput [formControl]="sensorEditGroup.controls.model">
+      </mat-form-field>
+      <div class="range-block">
+        <mat-form-field>
+          <mat-label>From</mat-label>
+          <input matInput type="number" [formControl]="sensorEditGroup.controls.from">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>To</mat-label>
+          <input matInput type="number" [formControl]="sensorEditGroup.controls.to">
+        </mat-form-field>
+        <mat-error *ngIf="sensorEditGroup.errors?.['toLessThanFrom']">Needs set two numbers. "To" should be more then "From"</mat-error>
+      </div>
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select [formControl]="sensorEditGroup.controls.type" [value]="sensorEditGroup.controls.type.value">
+          <mat-option *ngFor="let type of sensorTypes" [value]="type.id">{{type.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Unit</mat-label>
+        <mat-select [formControl]="sensorEditGroup.controls.unit" [value]="sensorEditGroup.controls.unit.value">
+          <mat-option *ngFor="let type of unitTypes" [value]="type.id">{{type.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Location</mat-label>
+        <input matInput [formControl]="sensorEditGroup.controls.location">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput [formControl]="sensorEditGroup.controls.description" placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button [routerLink]="'/'">Cancel</button>
+    <button mat-raised-button [disabled]="sensorEditGroup.invalid" (click)="save()">Save</button>
+  </mat-card-actions>
+</mat-card>

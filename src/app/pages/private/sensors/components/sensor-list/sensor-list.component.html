@@ -1,0 +1,75 @@
+<div class="sensor-list-wrapper">
+  <div class="sensor-top-block">
+    <div class="search-block">
+      <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput type="text" [(ngModel)]="searchPhrase">
+        <button matSuffix mat-icon-button *ngIf="searchPhrase" (click)="resetSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-icon-button (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <button mat-raised-button *ngIf="isAdmin | async" (click)="create()">Add sensor</button>
+  </div>
+  <table mat-table [dataSource]="pageResultModel?.content" class="mat-elevation-z8">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element" [matTooltip]="element.description"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Model Column -->
+    <ng-container matColumnDef="Model">
+      <th mat-header-cell *matHeaderCellDef> Model</th>
+      <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+    </ng-container>
+
+    <!-- Range Column -->
+    <ng-container matColumnDef="Range">
+      <th mat-header-cell *matHeaderCellDef> Range</th>
+      <td mat-cell *matCellDef="let element"> {{element.from}}-{{element.to}}</td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="Type">
+      <th mat-header-cell *matHeaderCellDef> Type</th>
+      <td mat-cell *matCellDef="let element"> {{element.type?.name}} </td>
+    </ng-container>
+
+    <!-- Unit Column -->
+    <ng-container matColumnDef="Unit">
+      <th mat-header-cell *matHeaderCellDef> Unit</th>
+      <td mat-cell *matCellDef="let element"> {{element.unit?.name}} </td>
+    </ng-container>
+
+    <!-- Location Column -->
+    <ng-container matColumnDef="Location">
+      <th mat-header-cell *matHeaderCellDef> Location</th>
+      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+    </ng-container>
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef="Edit" *ngIf="isAdmin | async">
+      <th mat-header-cell *matHeaderCellDef> Edit</th>
+      <td mat-cell *matCellDef="let element" (click)="create(element.id)">
+        <mat-icon>edit</mat-icon>
+      </td>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="Delete" *ngIf="isAdmin | async">
+      <th mat-header-cell *matHeaderCellDef> Delete</th>
+      <td mat-cell *matCellDef="let element" (click)="delete(element.id)">
+        <mat-icon>delete</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [length]="pageResultModel?.totalElements" [pageSize]="pageSize"></mat-paginator>
+</div>

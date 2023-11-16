@@ -1,0 +1,7 @@
+<mat-toolbar>
+  <span [routerLink]="'/'">Sensors monitor</span>
+  <span class="example-spacer"></span>
+  <span class="username">{{username | async}}</span>
+  <button mat-button (click)="logout()">Logout</button>
+</mat-toolbar>
+<router-outlet></router-outlet>

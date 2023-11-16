@@ -1,0 +1,32 @@
+:host {
+  .sensor-list-wrapper {
+    padding: 50px;
+
+    .sensor-top-block {
+      display: flex;
+      justify-content: space-between;
+
+      .search-block {
+        mat-form-field {
+          width: 300px;
+
+          ::ng-deep .mat-mdc-text-field-wrapper {
+            background-color: white;
+
+            .mat-mdc-form-field-focus-overlay {
+              background-color: white;
+            }
+          }
+        }
+      }
+    }
+
+    table {
+      box-shadow: none;
+
+      mat-icon {
+        cursor: pointer;
+      }
+    }
+  }
+}

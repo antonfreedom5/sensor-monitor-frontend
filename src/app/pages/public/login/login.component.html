@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-header><h2>Login</h2></mat-card-header>
+  <mat-card-content>
+    <form class="login-form">
+      <mat-form-field [formGroup]="loginFormGroup">
+        <mat-label>Login</mat-label>
+        <input matInput [formControl]="loginFormGroup.controls.username">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [formControl]="loginFormGroup.controls.password">
+      </mat-form-field>
+    </form>
+    <mat-error *ngIf="loginFormGroup.errors?.['unauthorized']">Login or password is incorrect</mat-error>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="login()" [disabled]="!loginFormGroup.valid">Login</button>
+  </mat-card-actions>
+</mat-card>
