@@ -9,5 +9,5 @@ export class SensorTypeHttpService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  public getAll = (type: SensorType): Observable<TypeModel[]> => this.httpClient.get<TypeModel[]>(APP_CONSTANTS.BASE_API + type);
+  public getAll = (type: SensorType): Observable<TypeModel[]> => this.httpClient.get<TypeModel[]>(APP_CONSTANTS.BASE_API + 'v1/' + type);
 }
