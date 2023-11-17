@@ -6,11 +6,12 @@ CRUD приложение для ведения учёта датчиков, с 
 * Angular 17
 * NgRx
 
+Клиентская часть, как и серверная, упаковывается в Docker контейнер, поэтому разворачивание приложения выполняется парой команд.
+
 ### Запуск клиентской части приложения
 
-1. Клонировать репозиторий git clone https://github.com/antonfreedom5/sensor-monitor-frontend.git
-2. Выполнить команду npm install
-3. Выполнить команду ng serve
+1. Клонировать репозиторий `git clone https://github.com/antonfreedom5/sensor-monitor-frontend.git`
+2. Выполнить команду `docker build -t sensor-monitor-front sensor-monitor-front/. && docker run -d -p 4200:80 sensor-monitor-front:latest`
 
 
 ---
